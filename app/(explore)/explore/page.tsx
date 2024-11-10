@@ -202,7 +202,7 @@ const categories = [
   { name: "Blockchain", icon: "🔗" },
   { name: "Product Management", icon: "📦" },
 ];
-function ExplorePage() {
+const  ExplorePage=async()=> {
   return (
     <div className="mt-14">
       <HeroSectionPromo />
