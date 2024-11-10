@@ -8,7 +8,7 @@ import {
   AlertDialogOverlay,
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
-import axios from "axios";
+
 import { Loader } from "lucide-react";
 import React, { useState, useMemo } from "react";
 import { Toaster } from "react-hot-toast";

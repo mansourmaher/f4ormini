@@ -94,3 +94,11 @@ export async function addSkillsToCourse(courseId:string,skills:string[]){
 
     }
 }
+export async function getCoursesForExplorePage(){
+    const courses=await db.course.findMany()
+    if(courses){
+        return courses;
+    }
+    return [];
+    
+}
