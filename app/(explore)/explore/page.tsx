@@ -6,8 +6,9 @@ import { Input } from "@headlessui/react";
 import { Card, CardContent } from "@/components/ui/card";
 import HeroSectionPromo from "./_explorecomponents/HeroSectionPromo";
 import WhyChooseUs from "./_explorecomponents/whychooseus";
+import { getCoursesForExplorePage } from "@/actions/course/course";
 
-const courses = [
+const coursese = [
   {
     id: "1",
     title: "React for Beginners",
@@ -203,8 +204,8 @@ const categories = [
   { name: "Product Management", icon: "📦" },
 ];
 
-const  ExplorePage=async()=> {
-  
+const ExplorePage = async () => {
+  const courses = await getCoursesForExplorePage();
   return (
     <div className="mt-14">
       <HeroSectionPromo />
@@ -261,6 +262,6 @@ const  ExplorePage=async()=> {
       <WhyChooseUs />
     </div>
   );
-}
+};
 
 export default ExplorePage;

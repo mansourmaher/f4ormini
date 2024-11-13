@@ -1,22 +1,12 @@
 "use client";
+import { getCoursesForExplorePage } from "@/actions/course/course";
 import CourseCard from "@/app/(explore)/explore/_explorecomponents/CourseCard";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import React from "react";
 
 interface CourseCardProps {
-  courses: {
-    id: string;
-    title: string;
-    description: string;
-    category: string;
-    price: number;
-    chapterLenght: number;
-    imageUrl: string;
-    avg: number;
-    totalReviews: number;
-    existingpurchase: boolean;
-  }[];
+  courses:Awaited<ReturnType<typeof getCoursesForExplorePage>>;
   titleofbanner: string;
   descriptionofbanner: string;
   section_id: string;

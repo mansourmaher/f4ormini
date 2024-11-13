@@ -102,3 +102,36 @@ export async function getCoursesForExplorePage(){
     return [];
     
 }
+export async function getCourseByIdForLearnPage(courseId:string){
+    const course=await db.course.findFirst({
+        where:{
+            id:courseId
+        },
+        include:{
+            chapters:{
+                select:{
+                    id:true,
+                    title:true,
+                    lessons:{
+                        select:{
+                            id:true,
+                            title:true,
+                            description:true,
+                            video:true,
+                            Quiz:true,
+                            assignments:true,
+                            resources:true,
+                            
+                        }
+                    }
+            },
+            
+        }
+        }
+    })
+    if(course){
+        return course;
+    }
+    return null;
+    
+}

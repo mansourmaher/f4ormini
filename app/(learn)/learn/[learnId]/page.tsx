@@ -4,21 +4,33 @@ import CourseModule from "../../_learn_compoenets/courseModule";
 import RecemondedBlock from "../../_learn_compoenets/recomendedBlock";
 import CategoryCompoent from "../../_learn_compoenets/ReveiwsCompoent";
 import HeroSection from "./_learncomponents/HeroSection";
+import { getCourseByIdForLearnPage } from "@/actions/course/course";
 
-function LearnPage() {
+const LearnPage = async ({ params }: { params: { learnId: string } }) => {
+  const course = await getCourseByIdForLearnPage(params.learnId);
+
   return (
     <div className="space-y-8">
-      <HeroSection />
-      <div className="transform -translate-y-24 ">
+      <HeroSection
+        title={course?.title}
+        chaptersLength={course?.chapters.length}
+      />
+      <div className="transform lg:-translate-y-24 ">
         <div className="mt-10  container mx-auto">
           <LearnSectionheaders />
         </div>
         <div className="mt-10 container mx-auto">
-          <WahtLearn />
+          <WahtLearn Skills={course?.skills} />
         </div>
-        <div className="mt-10 container mx-auto">
-          <CourseModule />
-        </div>
+        <section id="course-module" className="mt-10 container mx-auto">
+          <CourseModule
+            courseTitle={course?.title}
+            courseDescrpeiton={course?.description}
+            // @ts-ignore
+            chapterss={course?.chapters!}
+            image={course?.image}
+          />
+        </section>
         <div className="mt-10 container mx-auto">
           <RecemondedBlock />
         </div>
@@ -28,6 +40,6 @@ function LearnPage() {
       </div>
     </div>
   );
-}
+};
 
 export default LearnPage;

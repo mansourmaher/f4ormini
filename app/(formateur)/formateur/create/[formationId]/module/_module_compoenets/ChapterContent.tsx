@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import UploadLessonVideo from "./UploadLessonVideo";
+import { Textarea } from "@/components/ui/textarea";
 
 interface LessonContentProps {
   lessonData: Awaited<ReturnType<typeof getLessonById>>;
@@ -47,7 +48,7 @@ function ChapterContent({ lessonData }: LessonContentProps) {
   };
   const { isValid, isSubmitting } = form.formState;
   const onSubmite = async (values: z.infer<typeof schema>) => {
-    alert("submitting");
+  
     await updateLessonContent(values, lessonData?.id!);
   };
   return (
@@ -96,11 +97,9 @@ function ChapterContent({ lessonData }: LessonContentProps) {
                     <FormItem>
                       <FormControl>
                         {/* @ts-ignore */}
-                        <Editor
+                        <Textarea
                           {...field}
-                          onChange={(value) => {
-                            form.setValue("description", value);
-                          }}
+                          placeholder="e.g. Introduction to programming"
                         />
                       </FormControl>
                       {!form.formState.errors.description?.message && (

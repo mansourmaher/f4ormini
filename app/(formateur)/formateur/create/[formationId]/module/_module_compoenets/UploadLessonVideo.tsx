@@ -1,34 +1,3 @@
-// import { Button } from "@/components/ui/button";
-// import { Card, CardContent } from "@/components/ui/card";
-// import { Label } from "@/components/ui/label";
-// import { Upload, Video } from "lucide-react";
-
-// function UploadLessonVideo() {
-//   return (
-//     <div className="space-y-2">
-//       <Label>Video Content</Label>
-//       <Card className="border-dashed">
-//         <CardContent className="p-6">
-//           <div className="flex flex-col items-center justify-center space-y-4">
-//             <Video className="w-12 h-12 text-muted-foreground" />
-//             <div className="space-y-2 text-center">
-//               <h3 className="font-medium">Upload Video</h3>
-//               <p className="text-sm text-muted-foreground">
-//                 Drag and drop your video file here
-//               </p>
-//             </div>
-//             <Button variant="secondary">
-//               <Upload className="w-4 h-4 mr-2" />
-//               Choose File
-//             </Button>
-//           </div>
-//         </CardContent>
-//       </Card>
-//     </div>
-//   );
-// }
-
-//  export default UploadLessonVideo;
 "use client";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -52,6 +21,7 @@ function UploadLessonVideo({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<number | null>(null);
+  const [videoDuration, setVideoDuration] = useState<number | null>(null);
 
   const { startUpload } = useUploadThing("lessonVideo", {
     onUploadError: (error) => {
@@ -63,24 +33,34 @@ function UploadLessonVideo({
     },
   });
 
+  const handleVideoUpload = async (acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+
+    // Create a temporary video element to load the file and get duration
+    const tempVideo = document.createElement("video");
+    tempVideo.src = URL.createObjectURL(file);
+    tempVideo.onloadedmetadata = () => {
+      setVideoDuration(tempVideo.duration); // Get video duration
+      URL.revokeObjectURL(tempVideo.src); // Clean up the object URL
+    };
+
+    setLoading(true);
+    setError(null);
+
+    const res = await startUpload([file]);
+    setLoading(false);
+
+    if (res) {
+      setVideo(res[0].url);
+      onVideoChange(res[0].url);
+    }
+  };
+
   return (
     <div className="space-y-2">
       <Label>Video Content</Label>
       <div className="border-2 border-dashed rounded-lg p-6 text-center hover:bg-muted/50 transition-colors max-h-[480px]">
-        <Dropzone
-          accept={{ "video/*": [] }}
-          onDrop={async (acceptedFiles) => {
-            setLoading(true);
-            setError(null);
-            const res = await startUpload(acceptedFiles);
-            setLoading(false);
-
-            if (res) {
-              setVideo(res[0].url);
-              onVideoChange(res[0].url);
-            }
-          }}
-        >
+        <Dropzone accept={{ "video/*": [] }} onDrop={handleVideoUpload}>
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className="flex flex-col items-center">
               <input {...getInputProps()} />
@@ -129,6 +109,15 @@ function UploadLessonVideo({
           )}
         </Dropzone>
       </div>
+      {videoDuration && (
+        <p className="text-sm text-muted-foreground mt-2">
+          Duration: {Math.floor(videoDuration / 60)}:
+          {Math.floor(videoDuration % 60)
+            .toString()
+            .padStart(2, "0")}{" "}
+          minutes
+        </p>
+      )}
     </div>
   );
 }

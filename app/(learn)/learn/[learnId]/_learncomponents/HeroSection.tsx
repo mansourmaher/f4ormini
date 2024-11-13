@@ -4,6 +4,9 @@ import backgroundFaqs from "@/app/images/background-faqs.jpg";
 import AvatarGroup from "@/app/ui-components/avatarsgroup";
 import Button from "@/app/ui-components/button";
 import { BookOpenIcon } from "@heroicons/react/20/solid";
+import { FaLevelDownAlt } from "react-icons/fa";
+import { ChartArea, Users } from "lucide-react";
+
 const staticDtatoDisplay = {
   title: "Learning how to youth in the community",
   avatars: [
@@ -33,7 +36,12 @@ const staticDtatoDisplay = {
   likes: "98%",
 };
 
-function HeroSection() {
+interface HeroSectionProps {
+  title: string | undefined;
+  chaptersLength: number | undefined;
+}
+
+function HeroSection({ title, chaptersLength }: HeroSectionProps) {
   return (
     <>
       <div className="relative">
@@ -44,9 +52,7 @@ function HeroSection() {
           className="object-cover h-[70vh] w-screen"
         />
         <div className="absolute inset-0 flex flex-col items-center text-center container mx-auto place-content-center space-y-4 md:items-center lg:items-start md:text-left">
-          <h1 className="text-4xl font-extrabold">
-            Learn More About Our Platform
-          </h1>
+          <h1 className="text-4xl font-extrabold">{title}</h1>
 
           <div className="flex gap-x-2 items-center">
             <AvatarGroup />
@@ -89,12 +95,33 @@ function HeroSection() {
       </div>
 
       {/* Card component */}
-      <div className="relative w-11/12 -translate-y-24 bg-white rounded-lg shadow-lg lg:p-10 mx-auto -mt-[90px]">
-        <div className="grid grid-cols-1 place-content-center sm:grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="relative w-11/12 lg:-translate-y-24 bg-white rounded-lg shadow-lg lg:p-10 mx-auto -mt-[90px] p-10">
+        <div className="grid grid-cols-2 place-content-center sm:grid-cols-2  lg:grid-cols-4 gap-6">
           <div className="space-y-2 border-r border-gray-300 pr-4">
             <div className="flex items-center">
               <BookOpenIcon className="h-8 w-8 text-indigo-500 mr-2" />
-              <p className="text-2xl font-bold">3 modules</p>
+              <p className="text-xl font-bold">{chaptersLength} modules</p>
+            </div>
+            <p className="text-sm text-slate-500">
+              Gain insight into a topic and learn the fundamentals.
+            </p>
+          </div>{" "}
+          <div className="space-y-2 border-r border-gray-300 pr-4">
+            <div className="flex items-center">
+              <Users className="h-8 w-8 text-indigo-500 mr-2" />
+              <p className="text-xl font-bold">
+                {" "}
+                {staticDtatoDisplay.enrolled} enrolled
+              </p>
+            </div>
+            <p className="text-sm text-slate-500">
+              {staticDtatoDisplay.enrolled} students enrolled in this course
+            </p>
+          </div>{" "}
+          <div className="space-y-2 border-r border-gray-300 pr-4">
+            <div className="flex items-center">
+              <ChartArea className="h-8 w-8 text-indigo-500 mr-2" />
+              <p className="text-xl font-bold">Advanced level</p>
             </div>
             <p className="text-sm text-slate-500">
               Gain insight into a topic and learn the fundamentals.
@@ -103,25 +130,7 @@ function HeroSection() {
           <div className="space-y-2 border-r border-gray-300 pr-4">
             <div className="flex items-center">
               <BookOpenIcon className="h-8 w-8 text-indigo-500 mr-2" />
-              <p className="text-2xl font-bold">3 modules</p>
-            </div>
-            <p className="text-sm text-slate-500">
-              Gain insight into a topic and learn the fundamentals.
-            </p>
-          </div>{" "}
-          <div className="space-y-2 border-r border-gray-300 pr-4">
-            <div className="flex items-center">
-              <BookOpenIcon className="h-8 w-8 text-indigo-500 mr-2" />
-              <p className="text-2xl font-bold">3 modules</p>
-            </div>
-            <p className="text-sm text-slate-500">
-              Gain insight into a topic and learn the fundamentals.
-            </p>
-          </div>{" "}
-          <div className="space-y-2 border-r border-gray-300 pr-4">
-            <div className="flex items-center">
-              <BookOpenIcon className="h-8 w-8 text-indigo-500 mr-2" />
-              <p className="text-2xl font-bold">3 modules</p>
+              <p className="text-xl font-bold">3 modules</p>
             </div>
             <p className="text-sm text-slate-500">
               Gain insight into a topic and learn the fundamentals.

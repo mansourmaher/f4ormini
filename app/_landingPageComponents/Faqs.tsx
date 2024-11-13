@@ -1,61 +1,62 @@
-import Image from 'next/image'
+import Image from "next/image";
 
-import { Container } from '../_landingPageComponents/Container'
-import backgroundImage from '../images/background-faqs.jpg'
+import { Container } from "../_landingPageComponents/Container";
+import backgroundImage from "../images/background-faqs.jpg";
 
 const faqs = [
   [
     {
-      question: 'Does TaxPal handle VAT?',
+      question: "What types of courses are available on the platform?",
       answer:
-        'Well no, but if you move your company offshore you can probably ignore it.',
+        "Our platform offers a variety of courses, from technology and business to creative arts and personal development.",
     },
     {
-      question: 'Can I pay for my subscription via purchase order?',
-      answer: 'Absolutely, we are happy to take your money in all forms.',
+      question: "Can I get a certificate after completing a course?",
+      answer:
+        "Yes, most courses offer a certificate of completion which you can add to your professional profile.",
     },
     {
-      question: 'How do I apply for a job at TaxPal?',
+      question: "How do I become an instructor on the platform?",
       answer:
-        'We only hire our customers, so subscribe for a minimum of 6 months and then let’s talk.',
+        "We're always looking for skilled instructors! Contact us to discuss your course idea and we’ll guide you through the process.",
     },
   ],
   [
     {
-      question: 'What was that testimonial about tax fraud all about?',
+      question: "Is there a way to get feedback on my assignments?",
       answer:
-        'TaxPal is just a software application, ultimately your books are your responsibility.',
+        "Absolutely! Many courses include graded assignments and peer reviews for in-depth feedback.",
     },
     {
-      question:
-        'TaxPal sounds horrible but why do I still feel compelled to purchase?',
+      question: "Can I access the courses offline?",
       answer:
-        'This is the power of excellent visual design. You just can’t resist it, no matter how poorly it actually functions.',
+        "With our mobile app, you can download lessons to access offline anytime, anywhere.",
     },
     {
-      question:
-        'I found other companies called TaxPal, are you sure you can use this name?',
+      question: "Are there any free courses available?",
       answer:
-        'Honestly not sure at all. We haven’t actually incorporated or anything, we just thought it sounded cool and made this website.',
+        "Yes, we offer a selection of free courses to help you get started with learning.",
     },
   ],
   [
     {
-      question: 'How do you generate reports?',
+      question: "How can I reset my password?",
       answer:
-        'You just tell us what data you need a report for, and we get our kids to create beautiful charts for you using only the finest crayons.',
+        "Click on the 'Forgot Password' link on the login page, and follow the instructions to reset it.",
     },
     {
-      question: 'Can we expect more inventory features?',
-      answer: 'In life it’s really better to never expect anything at all.',
+      question: "Will there be new courses added regularly?",
+      answer:
+        "Yes, we’re constantly updating our catalog with new and relevant courses across various subjects.",
     },
     {
-      question: 'I lost my password, how do I get into my account?',
+      question: "What should I do if I experience technical issues?",
       answer:
-        'Send us an email and we will send you a copy of our latest password spreadsheet so you can find your information.',
+        "Please contact our support team, and we’ll assist you with any technical difficulties you may encounter.",
     },
   ],
-]
+];
+
 
 export function Faqs() {
   return (
@@ -73,12 +74,9 @@ export function Faqs() {
         unoptimized
       />
       <Container className="relative">
-        <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2
-            id="faq-title"
-            className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl"
-          >
-            Frequently asked questions
+        <div className="container mx-auto ">
+          <h2 className="text-3xl font-bold tracking-tighter text-center sm:text-5xl ">
+            Frequently Asked Questions
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
             If you can’t find what you’re looking for, email our support team
@@ -106,5 +104,5 @@ export function Faqs() {
         </ul>
       </Container>
     </section>
-  )
+  );
 }

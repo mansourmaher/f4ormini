@@ -5,22 +5,14 @@ import ReviewProgress from "./Review";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, DollarSign, Eye, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getCoursesForExplorePage } from "@/actions/course/course";
 
 interface Course {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-  chapterLenght: number;
-  imageUrl: string | StaticImageData;
-  avg: number;
-  totalReviews: number;
-  existingpurchase: boolean;
+  course:Awaited<ReturnType<typeof getCoursesForExplorePage>>[0];
 }
 
 type CourseCardProps = {
-  course: Course;
+  course: Course["course"];
 };
 
 function CourseCard({ course }: CourseCardProps) {
@@ -29,7 +21,7 @@ function CourseCard({ course }: CourseCardProps) {
       <div className="relative w-full aspect-video rounded-xl mb-4">
         <Image
           className="w-full object-cover rounded-xl"
-          src={course.imageUrl}
+          src={course.image}
           alt="Course Image"
           fill
           sizes="100vw"
@@ -45,8 +37,8 @@ function CourseCard({ course }: CourseCardProps) {
       <div className="px-2">
         <ReviewProgress
           courseId={course.id}
-          avg={course.avg!}
-          totalReviews={course.totalReviews!}
+          avg={4.5}
+          totalReviews={24}
           isForCard={true}
         />
       </div>
