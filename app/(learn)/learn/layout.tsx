@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Header } from "@/app/_landingPageComponents/Header";
+import Navbar from "@/app/_landingPageComponents/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <div className="h-full flex space-y-8 ">
-      <Header />
+      <Navbar />
       <div className="w-screen ">{children}</div>
     </div>
   );
