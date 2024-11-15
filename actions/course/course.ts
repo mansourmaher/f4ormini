@@ -21,9 +21,9 @@ export async function createCourse(title:string){
         if(!user){
             return null;
         }
-        if(user.user.role!="TEACHER"){
-            return null;
-        }
+        // if(user.user.role!="TEACHER"){
+        //     return null;
+        // }
       
        const course= await db.course.create({
             data:{

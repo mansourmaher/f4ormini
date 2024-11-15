@@ -19,13 +19,15 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { CheckCircleIcon } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { createCourse } from "@/actions/course/course";
+
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Please enter a title",
   }),
 });
+
 const CreatePage = () => {
   const router = useRouter();
 
@@ -35,26 +37,38 @@ const CreatePage = () => {
       title: "",
     },
   });
+
   const { isSubmitting, isValid } = form.formState;
-  const [isloading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false); // Add success state
+  const [isPending, startTransition] = useTransition();
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsLoading(true);
-      const course = await createCourse(values.title);
-      router.push(`/formateur/create/${course?.id}`);
-
-      // const response = await axios.post("/api/courses", values);
-      // router.push(`/teacher/courses/${response.data.id}`);
+      startTransition(() => {
+        createCourse(values.title).then((result) => {
+          if (result) {
+            setIsSuccess(true); // Set success state
+            setTimeout(() => {
+              router.push(`/formateur/create/${result.id}`);
+            }, 2000); // Redirect after animation
+          } else {
+            setIsLoading(false); // Reset loading state
+            toast.error("Something went wrong");
+          }
+        });
+      });
     } catch (error) {
       toast.error("Something went wrong");
+      setIsLoading(false); // Reset loading state
     }
   };
-  //for the openAi neow
 
   return (
     <div className="max-w-5xl mx-auto flex md:items-center md:justify-center mt-48 my-auto p-6">
       <div>
-        {!isloading ? (
+        {!isLoading && !isSuccess && (
           <>
             <h1 className="text-2xl">Create a course and add chapters to it</h1>
             <p className="text-sm text-slate-600">
@@ -108,7 +122,9 @@ const CreatePage = () => {
               </motion.form>
             </Form>
           </>
-        ) : (
+        )}
+
+        {isLoading && isSuccess && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -128,4 +144,5 @@ const CreatePage = () => {
     </div>
   );
 };
+
 export default CreatePage;
