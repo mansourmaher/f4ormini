@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 interface CourseCardProps {
-  courses:Awaited<ReturnType<typeof getCoursesForExplorePage>>;
+  courses: Awaited<ReturnType<typeof getCoursesForExplorePage>>;
   titleofbanner: string;
   descriptionofbanner: string;
   section_id: string;
@@ -35,6 +35,24 @@ function CourseListSection({
 
       <div className="w-full">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4  gap-6  border p-8 rounded-lg bg-gray-100 ">
+          {courses.slice(0, i).map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+          {courses.slice(0, i).map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}{" "}
+          {courses.slice(0, i).map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}{" "}
+          {courses.slice(0, i).map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}{" "}
+          {courses.slice(0, i).map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}{" "}
+          {courses.slice(0, i).map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}{" "}
           {courses.slice(0, i).map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}

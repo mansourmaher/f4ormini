@@ -65,7 +65,9 @@ model User {
   github        String?
   patiants      String[]
   points        Int?      @default(0)
+  course        course[]
 }
+
 model VerificationToken {
   id      String   @id @default(uuid())
   email   String
@@ -99,6 +101,9 @@ model course {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  createdById String
+  createdBy   User  @relation(fields: [createdById], references: [id])
 }
 
 model Lesson {
@@ -142,10 +147,10 @@ model Chapter {
 }
 
 model Quiz {
-  id        String   @id @default(uuid())
-  question  String
-  answer    String
-  
+  id       String @id @default(uuid())
+  question String
+  answer   String
+
   createdAt DateTime @default(now())
 
   options  Options[]

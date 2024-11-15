@@ -1,6 +1,5 @@
-import { course } from './../../node_modules/.prisma/client/index.d';
 "use server"
-
+import { auth } from '@/auth';
 import { db } from "@/lib/db"
 
 interface courseDetail{  
@@ -18,13 +17,22 @@ interface courseSettings{
 
 export async function createCourse(title:string){
     try{
-        // check the user and his role
+        const user=await auth()
+        if(!user){
+            return null;
+        }
+        if(user.user.role!="TEACHER"){
+            return null;
+        }
+      
        const course= await db.course.create({
             data:{
+                
                 title:title,
                 description:"",
                 image:"",
-                price:0
+                price:0,
+                createdById:user.user.id!,
 
             }
         })
