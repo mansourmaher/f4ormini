@@ -8,7 +8,9 @@ import { getCourseByIdForLearnPage } from "@/actions/course/course";
 
 const LearnPage = async ({ params }: { params: { learnId: string } }) => {
   const course = await getCourseByIdForLearnPage(params.learnId);
-
+  if (!course) {
+    return <div>Course not found</div>;
+  }
   return (
     <div className="space-y-8">
       <HeroSection

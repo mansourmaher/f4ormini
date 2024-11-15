@@ -1,4 +1,5 @@
 import { Header } from "@/app/_landingPageComponents/Header";
+import Navbar from "@/app/_landingPageComponents/Navbar";
 import React from "react";
 
 export default function RootLayout({
@@ -8,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <div className="h-full flex">
-      <Header />
+      <Navbar />
       <div className="w-screen bg-slate-100">{children}</div>
     </div>
   );

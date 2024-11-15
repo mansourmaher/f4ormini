@@ -24,7 +24,8 @@ Table Account {
 
 Table User {
   id String [pk]
-  name String
+  firstName String [not null]
+  lastName String [not null]
   email String [unique]
   emailVerified DateTime
   password String
@@ -42,6 +43,28 @@ Table User {
   github String
   patiants String[] [not null]
   points Int [default: 0]
+}
+
+Table VerificationToken {
+  id String [pk]
+  email String [not null]
+  token String [not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
+}
+
+Table PasswordResetToken {
+  id String [pk]
+  email String [not null]
+  token String [not null]
+  expires DateTime [not null]
+
+  indexes {
+    (email, token) [unique]
+  }
 }
 
 Table course {

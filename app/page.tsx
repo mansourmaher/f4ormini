@@ -11,6 +11,7 @@ import {
   Headphones,
   MonitorSmartphone,
 } from "lucide-react";
+import { auth } from "@/auth";
 const categories = [
   {
     title: "Standard One",
@@ -68,10 +69,12 @@ const categories = [
   },
 ];
 
-export default function Home() {
+const Home = async () => {
+  const user = await auth();
+  console.log(user)
   return (
     <>
-      <Header />
+      <Header user={user} />
       <main>
         <Hero />
         <div className="bg-gray-50">
@@ -176,4 +179,6 @@ export default function Home() {
       </main>
     </>
   );
-}
+};
+
+export default Home;
