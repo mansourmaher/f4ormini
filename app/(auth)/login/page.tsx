@@ -13,7 +13,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
 
-
 import {
   Form,
   FormControl,
@@ -121,7 +120,7 @@ export default function Login() {
               </FormItem>
             )}
           />
-          <FormError message={error } />
+          <FormError message={error} />
           <FormSucces message={succes} />
           <div>
             <Button
