@@ -154,7 +154,7 @@ function VideoLesson() {
                 <div className="prose max-w-none">
                   <h2>Video Transcript</h2>
                   <p>
-                    [0:00] Welcome to "Getting Started with HTML and CSS". In
+                    [0:00] Welcome to Getting Started with HTML and CSS. In
                     this video we ll explore the foundations of web
                     development...
                   </p>
