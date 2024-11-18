@@ -4,16 +4,17 @@ import VideoLesson from "./videoLesson";
 import PdfLesson from "./pdfLesson";
 import { URLSearchParams } from "url";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 function LessonMain() {
   const params = useSearchParams();
   const lessonType = params.get("type");
 
   return (
-    <div>
+    <Suspense>
       {lessonType === "video" && <VideoLesson />}
       {lessonType === "pdf" && <PdfLesson />}
-    </div>
+    </Suspense>
   );
 }
 

@@ -6,7 +6,6 @@ import { FileText, PlayCircle, ShieldQuestion } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
 
 interface Props {
   chapters: Awaited<ReturnType<typeof getAllchaptersPerCourse>>;
