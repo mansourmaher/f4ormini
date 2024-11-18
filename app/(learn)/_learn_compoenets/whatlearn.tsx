@@ -8,20 +8,22 @@ interface WahtLearnProps {
 
 function WahtLearn({ Skills }: WahtLearnProps) {
   return (
-    <section id="Skills" className="space-y-4 bg-white border-b-2 p-4">
+    <section
+      id="Skills"
+      className="space-y-4 bg-white border-b-2 p-4 container mx-auto"
+    >
       <div>
         <h1 className="text-2xl font-extrabold">What you will learn</h1>
       </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 text-sm text-slate-500 ">
         {Skills?.map((skill, index) => (
-          <div key={index} className="relative group rounded-lg border p-6 ">
-            <div className="flex items-start gap-4">
+          <div key={index} className="relative">
+            <div className="flex items-center gap-4">
               <div className="mt-1 bg-primary/10 rounded-full p-1">
                 <Check className="w-4 h-4 text-blue-500" />
               </div>
-              <div className="space-y-2">
+              <div className="">
                 <h3 className="font-medium leading-none">{skill}</h3>
-
                 <div className="pt-2"></div>
               </div>
             </div>

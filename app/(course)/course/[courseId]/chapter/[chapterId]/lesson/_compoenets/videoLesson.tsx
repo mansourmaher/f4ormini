@@ -132,10 +132,10 @@ function VideoLesson() {
                   <h2>Video: Getting Started with HTML and CSS</h2>
                   <p>Duration: 5 minutes</p>
                   <p>
-                    In this introductory video, you'll learn the fundamentals of
-                    HTML and CSS, the building blocks of web development. We'll
+                    In this introductory video, you ll learn the fundamentals of
+                    HTML and CSS, the building blocks of web development. We ll
                     cover basic HTML structure, common tags, and how to style
-                    your content using CSS. By the end of this video, you'll
+                    your content using CSS. By the end of this video, you ll
                     have a solid foundation to start creating your own web
                     pages.
                   </p>
@@ -155,21 +155,21 @@ function VideoLesson() {
                   <h2>Video Transcript</h2>
                   <p>
                     [0:00] Welcome to "Getting Started with HTML and CSS". In
-                    this video, we'll explore the foundations of web
+                    this video we ll explore the foundations of web
                     development...
                   </p>
                   <p>
-                    [0:30] Let's start with HTML. HTML stands for HyperText
-                    Markup Language, and it's the backbone of every web page...
+                    [0:30] Let s start with HTML. HTML stands for HyperText
+                    Markup Language, and it s the backbone of every web page...
                   </p>
                   <p>
-                    [2:15] Now that we understand HTML, let's move on to CSS.
-                    CSS, or Cascading Style Sheets, is what makes our web pages
+                    [2:15] Now that we understand HTML, let s move on to CSS.
+                    CSS, or Cascading Style Sheets is what makes our web pages
                     look good...
                   </p>
                   <p>
                     [4:45] To wrap up, remember that HTML provides the
-                    structure, while CSS provides the style. Together, they form
+                    structure while CSS provides the style. Together, they form
                     the basis of web development...
                   </p>
                 </div>
