@@ -1,41 +1,50 @@
-import { HomeIcon } from '@heroicons/react/20/solid'
+"use client";
+import { cn } from "@/lib/utils";
+import { ChevronRightIcon, HomeIcon } from "@heroicons/react/20/solid";
 
 const pages = [
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Project Nero', href: '#', current: true },
-  { name: 'Project Nero', href: '#', current: true },
-  { name: 'Project Nero', href: '#', current: true },
-  
-]
+  { name: "Projects", href: "#", current: false },
+  { name: "Project Nero", href: "#", current: true },
+];
+interface Props {
+  listofLinks: {
+    name: string | null | undefined;
+    url: string | null;
+    current?: boolean;
+  }[];
+}
 
-export default function Breadcrumb() {
+export default function Breadcrumb({ listofLinks }: Props) {
   return (
-    <nav aria-label="Breadcrumb" className="flex border-b pb-2 border-gray-200 bg-white">
-      <ol role="list" className=" flex w-full max-w-screen-xl space-x-4 px-4 sm:px-6 lg:px-6">
-        <li className="flex">
-          <div className="flex items-center">
-            <a href="#" className="text-gray-400 hover:text-gray-500">
+    <nav aria-label="Breadcrumb" className="flex">
+      <ol role="list" className="flex items-center space-x-4">
+        <li>
+          <div>
+            <a
+              href="#"
+              className="text-sm font-medium text-gray-500 hover:text-gray-700"
+            >
               <HomeIcon aria-hidden="true" className="h-5 w-5 flex-shrink-0" />
               <span className="sr-only">Home</span>
             </a>
           </div>
         </li>
-        {pages.map((page) => (
-          <li key={page.name} className="flex">
+        {listofLinks.map((page) => (
+          <li key={page.name}>
             <div className="flex items-center">
-              <svg
-                fill="currentColor"
-                viewBox="0 0 24 44"
-                preserveAspectRatio="none"
+              <ChevronRightIcon
                 aria-hidden="true"
-                className="h-full w-6 flex-shrink-0 text-gray-200"
-              >
-                <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-              </svg>
+                className="h-5 w-5 flex-shrink-0 text-blue-400"
+              />
               <a
-                href={page.href}
-                aria-current={page.current ? 'page' : undefined}
-                className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                href={page.url!}
+                aria-current={page.current ? "page" : undefined}
+                className={cn(
+                  page.current
+                    ? "text-blue-400 hover:text-blue-500"
+                    : "text-gray-400 hover:text-gray-500",
+                  "ml-4 text-sm font-medium"
+                )}
               >
                 {page.name}
               </a>
@@ -44,5 +53,5 @@ export default function Breadcrumb() {
         ))}
       </ol>
     </nav>
-  )
+  );
 }

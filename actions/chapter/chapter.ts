@@ -72,7 +72,11 @@ export async function getAllchaptersPerCourse(courseId: string) {
             lessons:{
                 select:{
                     id:true,
-                    title:true
+                    title:true,
+                    resources:true,
+                    video:true,
+                    Quiz:true,
+
                 }
             }
            },
@@ -87,5 +91,21 @@ export async function getAllchaptersPerCourse(courseId: string) {
     } catch (error) {
         console.error("Error getting chapters for course: ", error);
     }
+}
+export async function getChapterTitleById(chapterid:string){
+    try{
+        const chapter=await db.chapter.findFirst({
+            where:{
+                id:chapterid
+            }
+        })
+        if(chapter){
+            return chapter.title;
+        }
+        return null;
+    }catch(e){
+        console.error("Error getting chapter title by id: ", e);
+    }
+
 }
 

@@ -143,3 +143,16 @@ export async function getCourseByIdForLearnPage(courseId:string){
     return null;
     
 }
+
+export async function getCourseTitleById(courseId:string){
+    const course=await db.course.findFirst({
+        where:{
+            id:courseId
+        }
+    })
+    if(course){
+        return course.title;
+    }
+    return null;
+    
+}

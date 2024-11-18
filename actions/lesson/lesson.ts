@@ -236,3 +236,18 @@ export  async function getAllQuizBylesson(lessonId:string){
         console.log(e)
     }
 }
+export async function getLessonTitleById(lessonId:string){
+    try{
+        const lesson=await db.lesson.findFirst({
+            where:{
+                id:lessonId
+            },
+            select:{
+                title:true
+            }
+        })
+        return lesson
+    }catch(e){
+        console.log(e)
+    }
+}
