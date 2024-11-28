@@ -10,6 +10,19 @@ import NextAuth from "next-auth";
 
 const { auth } = NextAuth(authConfig);
 
+
+const isPublicRoutes=(url:string)=>{
+  if(publicRoutes.includes(url)){
+    return true
+  }
+  const dynamicRoutePatterns = [
+    /^\/learn\/[a-zA-Z0-9_-]+$/, 
+    /^\/course\/[a-zA-Z0-9_-]+$/,
+];
+
+return dynamicRoutePatterns.some((pattern) => pattern.test(url));
+}
+
 //@ts-ignore
 export default auth((req) => {
   const { nextUrl } = req;
@@ -19,7 +32,7 @@ export default auth((req) => {
   
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute = isPublicRoutes(nextUrl.pathname);
   const isAuthenticationRoute = authRoutes.includes(nextUrl.pathname);
 
   if (isApiAuthRoute || isPublicRoute) return null;

@@ -5,6 +5,7 @@ import PdfLesson from "./pdfLesson";
 import { URLSearchParams } from "url";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import QuizLesson from "./quizLesson";
 
 function LessonMain() {
   const params = useSearchParams();
@@ -14,6 +15,7 @@ function LessonMain() {
     <Suspense>
       {lessonType === "video" && <VideoLesson />}
       {lessonType === "pdf" && <PdfLesson />}
+      {lessonType === "quiz" && <QuizLesson />}
     </Suspense>
   );
 }

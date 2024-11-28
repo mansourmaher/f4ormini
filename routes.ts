@@ -6,6 +6,10 @@ export const publicRoutes = [
     "/api/webhook",
     "/explore",
     "/learn",
+    "/course"
+    
+
+    
    
 ];
 

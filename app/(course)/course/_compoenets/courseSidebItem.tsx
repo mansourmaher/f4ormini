@@ -47,12 +47,11 @@ function CourseSidebItem({ chapters, courseId }: Props) {
                     href={`/course/${courseId}/chapter/${chapterItem.id}/lesson/${lesson.id}?type=video`}
                   >
                     <Button
-                      variant="ghost"
                       className={cn(
                         isItemSelected(lesson.id)
                           ? "bg-indigo-700 text-white hover:text-white font-bold"
                           : "hover:bg-indigo-700 hover:text-white",
-                        "w-full justify-start text-sm font-normal h-auto py-2"
+                        "w-full justify-start  h-auto py-2 border-indigo-700 border-l-2 "
                       )}
                       onClick={() =>
                         setSelectedItem(
@@ -69,7 +68,7 @@ function CourseSidebItem({ chapters, courseId }: Props) {
                     <div className="ml-6 space-y-2">
                       {lesson.resources.map((resource) => (
                         <div className="space-y-2" key={resource.id}>
-                          <div className="flex items-center gap-2 text-sm text-green-400  mb-2">
+                          <div className="flex items-center gap-2 text-sm   mb-2">
                             <>
                               <FileText className="h-4 w-4" />
                               <span>Reading</span>
@@ -79,20 +78,16 @@ function CourseSidebItem({ chapters, courseId }: Props) {
                             href={`/course/${courseId}/chapter/${chapterItem.id}/lesson/${lesson.id}?type=pdf`}
                           >
                             <Button
-                              variant="ghost"
                               className={cn(
                                 selectedItem === resource.id
-                                  ? "border-indigo-700 text-indigo-700 border-l-2 hover:text-indigo-700"
+                                  ? "bg-indigo-700 text-white hover:text-white font-bold"
                                   : "hover:bg-indigo-700 hover:text-white",
-                                "w-full justify-start text-sm font-normal h-auto py-2"
+                                "w-full justify-start  h-auto py-2 border-indigo-700 border-l-2 "
                               )}
                               onClick={() => setSelectedItem(resource.id)}
                             >
                               <div className=" whitespace-pre-line">
                                 <div>{lesson.title}</div>
-                                <div className="text-xs text-muted-foreground">
-                                  5 min
-                                </div>
                               </div>
                             </Button>
                           </Link>
@@ -100,22 +95,28 @@ function CourseSidebItem({ chapters, courseId }: Props) {
                       ))}
                       {lesson.Quiz.length > 0 &&
                         lesson.Quiz.map((quiz) => (
-                          <div className="space-y-2 " key={quiz.id}>
-                            <div className="flex items-center gap-2 text-sm   text-yellow-400">
+                          <div className="space-y-4 " key={quiz.id}>
+                            <div className="flex items-center gap-2 text-sm  mb-2 text-yellow-400">
                               <ShieldQuestion className="h-4 w-4" />
                               <span>Quiz</span>
                             </div>
-                            <Button
-                              variant="ghost"
-                              className="w-full justify-start text-sm font-normal h-auto py-2  hover:bg-indigo-700 hover:text-white"
+                            <Link
+                              href={`/course/${courseId}/chapter/${chapterItem.id}/lesson/${lesson.id}?type=quiz`}
                             >
-                              <div className=" whitespace-pre-line">
-                                <div>quiz</div>
-                                <div className="text-xs text-muted-foreground">
-                                  5 min
+                              <Button
+                                className={cn(
+                                  selectedItem === lesson.id
+                                    ? "bg-indigo-700 text-white hover:text-white font-bold"
+                                    : "hover:bg-indigo-700 hover:text-white",
+                                  "w-full justify-start  h-auto py-2 border-indigo-700 border-l-2 "
+                                )}
+                                onClick={() => setSelectedItem(lesson.id)}
+                              >
+                                <div className=" whitespace-pre-line">
+                                  <div>quiz</div>
                                 </div>
-                              </div>
-                            </Button>
+                              </Button>
+                            </Link>
                           </div>
                         ))}
                     </div>
@@ -151,7 +152,7 @@ export default CourseSidebItem;
                           selectedItem === resource.id
                             ? "border-indigo-700 text-indigo-700 border-l-2 hover:text-indigo-700"
                             : "hover:bg-indigo-700 hover:text-white",
-                          "w-full justify-start text-sm font-normal h-auto py-2"
+                          "w-full justify-start  h-auto py-2"
                         )}
                         onClick={() => setSelectedItem(resource.id)}
                       >
@@ -174,7 +175,7 @@ export default CourseSidebItem;
                       </div>
                       <Button
                         variant="ghost"
-                        className="w-full justify-start text-sm font-normal h-auto py-2  hover:bg-indigo-700 hover:text-white"
+                        className="w-full justify-start  h-auto py-2  hover:bg-indigo-700 hover:text-white"
                       >
                         <div className=" whitespace-pre-line">
                           <div>quiz</div>

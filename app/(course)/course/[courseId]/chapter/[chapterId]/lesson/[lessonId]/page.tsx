@@ -34,7 +34,7 @@ const page = async ({
   ];
 
   return (
-    <section>
+    <section className="max-h-screen">
       <Breadcrumb listofLinks={list} />
       <div className="container mx-auto p-4">
         <LessonMain />

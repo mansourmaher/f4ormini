@@ -71,7 +71,7 @@ const categories = [
 
 const Home = async () => {
   const user = await auth();
-  console.log(user)
+
   return (
     <>
       <Header user={user} />
