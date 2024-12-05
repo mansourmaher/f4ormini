@@ -22,8 +22,8 @@ interface ChapterResourceProps {
         id: string;
         title: string;
         url: string;
-        descreption: string;
-        estimatedTime: number;
+        descreption: string | null;
+        estimatedTime: number | null;
       }[]
     | undefined;
   lessonId: string;
@@ -134,7 +134,7 @@ function ChapterResource({ resourcess, lessonId }: ChapterResourceProps) {
                     <Textarea
                       id={`description-${res.id}`}
                       placeholder="Enter resource description..."
-                      value={res.descreption}
+                      value={res.descreption!}
                       name="descreption"
                       className="min-h-[100px]"
                       onChange={(e) => updateResource(res.id, e)}
@@ -148,7 +148,7 @@ function ChapterResource({ resourcess, lessonId }: ChapterResourceProps) {
                       type="number"
                       placeholder="Enter estimated time..."
                       name="estimatedTime"
-                      value={res.estimatedTime}
+                      value={res.estimatedTime!}
                       onChange={(e) => updateResource(res.id, e)}
                     />
                   </div>

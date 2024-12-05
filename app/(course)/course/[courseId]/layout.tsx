@@ -7,6 +7,7 @@ import CourseSidbearFetchData from "../_compoenets/courseSidebFetchData";
 import CourseBreadCrumbs from "../_compoenets/courseBreadcrumb";
 import { getCourseById } from "@/actions/course/course";
 import { existpurchase } from "@/actions/courseuser/courseuser";
+import { UnothorizeState } from "@/app/_landingPageComponents/NotAuthorized";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,7 @@ const LayoutPage = async ({
     return null;
   }
   if (!exisintingpurchase) {
-    return <>Not authoriezd</>;
+    return <UnothorizeState />;
   }
   return (
     <div>

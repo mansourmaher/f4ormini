@@ -16,8 +16,8 @@ interface Resource {
     id?:string
     title:string
     url:string
-    estimatedTime:number
-    descreption:string
+    estimatedTime:number |null
+    descreption:string |null
 }
 
 export async function getLessonById(leessonId:string){

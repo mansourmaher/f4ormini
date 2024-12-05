@@ -47,7 +47,7 @@ const LessonPage = async ({
           </Card>
         </div>
         <div className="lg:col-span-3 ">
-          <ChapterResource resourcess={resources} lessonId={moduleId} />
+          <ChapterResource resourcess={resources!} lessonId={moduleId} />
         </div>
       </div>
     </div>
