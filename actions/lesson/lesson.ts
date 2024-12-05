@@ -1,5 +1,6 @@
 "use server"
 
+import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
@@ -12,8 +13,11 @@ interface LessonContent {
     video:string
 }
 interface Resource {
+    id?:string
     title:string
     url:string
+    estimatedTime:number
+    descreption:string
 }
 
 export async function getLessonById(leessonId:string){
@@ -62,7 +66,10 @@ export async function getAllresourcesPerLesson(lessonId:string){
             select:{
                 title:true,
                 url:true,
-                id:true
+                id:true,
+                descreption:true,
+                estimatedTime:true,
+
             }
         });
 
@@ -104,6 +111,37 @@ export async function changeLessonVisibility(lessonId:string,visibility:boolean)
     }catch(e){
         console.log(e);
     }
+}
+export async function updateResourceDeatil(resources:Resource[]){
+
+   try{
+    const user=await auth()
+    if(!user)
+    {
+        return null
+    }
+    for(const res of resources){
+        const estimatedTime = typeof res.estimatedTime === "string" 
+        ? parseFloat(res.estimatedTime) 
+        : res.estimatedTime;
+        const updateResourceDetail=await db.resource.update({
+            where:{
+                id:res.id
+            },
+            data:{
+                estimatedTime:estimatedTime,
+                descreption:res.descreption
+            }
+        })
+    }
+    
+   
+
+   }catch(e)
+   {
+    console.log(e)
+   }
+
 }
 // export async function POST(req: Request) {
 //     try {
@@ -248,6 +286,71 @@ export async function getLessonTitleById(lessonId:string){
         })
         return lesson
     }catch(e){
+        console.log(e)
+    }
+}
+export async function getLessonDetailsById(lessonId:string){
+    try{
+        const user=await auth()
+        if(!user)
+        {
+            return null
+        }
+        const lesson=await db.lesson.findFirst({
+            where:{
+                id:lessonId
+            },
+            include:{
+                resources:true
+            }
+        })
+        return lesson
+
+    }catch(e)
+    {
+        console.log(e)
+    }
+}
+export async function getResourceById(resId:string |undefined){
+    try{
+        if(!resId)
+        {
+            return null
+        }
+        const user=await auth()
+        if(!user){
+            return  null
+        }
+        const res=await db.resource.findFirst({
+            where:{
+                id:resId
+            }
+        })
+        return res
+
+    }catch(e)
+    {
+        console.log(e)
+    }
+}
+export async function getAllresourcesByLesson(lessonId:string)
+{
+    try{
+        const user=await auth()
+        if(!user)
+        {
+            return null
+        }
+        const resources=await db.resource.findMany({
+            where:{
+                lessonId:lessonId
+            }
+
+        })
+        return resources
+
+    }catch(e)
+    {
         console.log(e)
     }
 }

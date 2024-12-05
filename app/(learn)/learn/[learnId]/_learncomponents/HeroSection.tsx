@@ -6,6 +6,7 @@ import Button from "@/app/ui-components/button";
 import { BookOpenIcon } from "@heroicons/react/20/solid";
 import { FaLevelDownAlt } from "react-icons/fa";
 import { ChartArea, Users } from "lucide-react";
+import { existpurchase } from "@/actions/courseuser/courseuser";
 
 const staticDtatoDisplay = {
   title: "Learning how to youth in the community",
@@ -39,9 +40,17 @@ const staticDtatoDisplay = {
 interface HeroSectionProps {
   title: string | undefined;
   chaptersLength: number | undefined;
+  courseId: string;
 }
 
-function HeroSection({ title, chaptersLength }: HeroSectionProps) {
+const HeroSection = async ({
+  title,
+  chaptersLength,
+  courseId,
+}: HeroSectionProps) => {
+  const existingpurchase = await existpurchase(courseId);
+  console.log(existingpurchase);
+
   return (
     <>
       <div className="relative">
@@ -60,7 +69,12 @@ function HeroSection({ title, chaptersLength }: HeroSectionProps) {
           </div>
 
           <div className="flex gap-x-4 items-center">
-            <Button />
+            {!existingpurchase ? (
+              <Button courseId={courseId} />
+            ) : (
+              <>already enrolled</>
+            )}
+
             <p>
               <span className="font-bold">{staticDtatoDisplay.enrolled}</span>{" "}
               students enrolled
@@ -141,6 +155,6 @@ function HeroSection({ title, chaptersLength }: HeroSectionProps) {
       </div>
     </>
   );
-}
+};
 
 export default HeroSection;

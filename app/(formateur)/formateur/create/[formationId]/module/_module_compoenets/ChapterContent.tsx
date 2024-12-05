@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Upload, Video } from "lucide-react";
+import { Loader, Upload, Video } from "lucide-react";
 import { Editor } from "@/app/ui-components/editor";
 import { getLessonById, updateLessonContent } from "@/actions/lesson/lesson";
 import { z } from "zod";
@@ -48,7 +48,6 @@ function ChapterContent({ lessonData }: LessonContentProps) {
   };
   const { isValid, isSubmitting } = form.formState;
   const onSubmite = async (values: z.infer<typeof schema>) => {
-  
     await updateLessonContent(values, lessonData?.id!);
   };
   return (
@@ -128,8 +127,13 @@ function ChapterContent({ lessonData }: LessonContentProps) {
             variant="primary"
             size={"sm"}
             onClick={form.handleSubmit(onSubmite)}
+            disabled={isSubmitting}
           >
-            Save Changes {isValid}
+            {isSubmitting ? (
+              <Loader className="animate-spin"></Loader>
+            ) : (
+              "Save Changes"
+            )}
           </Button>
         </div>
       </CardContent>

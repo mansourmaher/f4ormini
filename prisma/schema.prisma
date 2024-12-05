@@ -66,6 +66,7 @@ model User {
   patiants      String[]
   points        Int?      @default(0)
   course        course[]
+  courseUser CourseUser[]
 }
 
 model VerificationToken {
@@ -102,8 +103,10 @@ model course {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  courseUserId CourseUser[]
+
   createdById String
-  createdBy   User  @relation(fields: [createdById], references: [id])
+  createdBy   User   @relation(fields: [createdById], references: [id])
 }
 
 model Lesson {
@@ -125,13 +128,15 @@ model Lesson {
 }
 
 model Resource {
-  id        String   @id @default(cuid())
-  url       String
-  title     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Lesson    Lesson?  @relation(fields: [lessonId], references: [id])
-  lessonId  String?
+  id            String   @id @default(cuid())
+  url           String
+  title         String
+  descreption   String?
+  estimatedTime Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  Lesson        Lesson?  @relation(fields: [lessonId], references: [id])
+  lessonId      String?
 }
 
 model Chapter {
@@ -168,4 +173,13 @@ model Options {
   quiz          Quiz     @relation(fields: [quizId], references: [id])
 
   @@index([quizId], name: "quizId")
+}
+
+model CourseUser {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User?    @relation(fields: [userId], references: [id])
+  courseId  String
+  course    course   @relation(fields: [courseId], references: [id])
+  createdAt DateTime @default(now())
 }

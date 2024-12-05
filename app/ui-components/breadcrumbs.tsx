@@ -16,7 +16,7 @@ interface Props {
 
 export default function Breadcrumb({ listofLinks }: Props) {
   return (
-    <nav aria-label="Breadcrumb" className="flex fixed">
+    <nav aria-label="Breadcrumb" className="flex ml-4">
       <ol role="list" className="flex items-center space-x-4">
         <li>
           <div>

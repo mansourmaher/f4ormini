@@ -16,6 +16,7 @@ const LearnPage = async ({ params }: { params: { learnId: string } }) => {
       <HeroSection
         title={course?.title}
         chaptersLength={course?.chapters.length}
+        courseId={course.id}
       />
       <div className="transform lg:-translate-y-24 ">
         <div className="mt-10  container mx-auto">
@@ -31,6 +32,7 @@ const LearnPage = async ({ params }: { params: { learnId: string } }) => {
             // @ts-ignore
             chapterss={course?.chapters!}
             image={course?.image}
+            courseId={course.id}
           />
         </section>
         <div className="mt-10 container mx-auto">

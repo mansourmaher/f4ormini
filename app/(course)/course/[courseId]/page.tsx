@@ -10,7 +10,7 @@ const page = async ({ params }: { params: { courseId: string } }) => {
   const links = [
     {
       name: courseTitle,
-      url: `/course/${params.courseId}`,
+      url: `/learn/${params.courseId}`,
       current: true,
     },
   ];

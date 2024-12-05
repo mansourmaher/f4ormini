@@ -44,6 +44,7 @@ Table User {
   patiants String[] [not null]
   points Int [default: 0]
   course course [not null]
+  courseUser CourseUser [not null]
 }
 
 Table VerificationToken {
@@ -82,6 +83,7 @@ Table course {
   status String [not null, default: 'draft']
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
+  courseUserId CourseUser [not null]
   createdById String [not null]
   createdBy User [not null]
 }
@@ -107,6 +109,8 @@ Table Resource {
   id String [pk]
   url String [not null]
   title String [not null]
+  descreption String
+  estimatedTime Float
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   Lesson Lesson
@@ -141,6 +145,15 @@ Table Options {
   quiz Quiz [not null]
 }
 
+Table CourseUser {
+  id String [pk]
+  userId String [not null]
+  user User
+  courseId String [not null]
+  course course [not null]
+  createdAt DateTime [default: `now()`, not null]
+}
+
 Enum UserRole {
   STUDENT
   ADMIN
@@ -160,3 +173,7 @@ Ref: Chapter.courseId > course.id
 Ref: Quiz.lessonId > Lesson.id
 
 Ref: Options.quizId > Quiz.id
+
+Ref: CourseUser.userId > User.id
+
+Ref: CourseUser.courseId > course.id

@@ -1,20 +1,29 @@
 import { getChapterTitleById } from "@/actions/chapter/chapter";
 import { getCourseTitleById } from "@/actions/course/course";
-import { getLessonTitleById } from "@/actions/lesson/lesson";
+import {
+  getLessonDetailsById,
+  getLessonTitleById,
+} from "@/actions/lesson/lesson";
 import Breadcrumb from "@/app/ui-components/breadcrumbs";
 
-import VideoLesson from "../_compoenets/videoLesson";
-import PdfLesson from "../_compoenets/pdfLesson";
 import LessonMain from "../_compoenets/lessonMain";
 
 const page = async ({
   params,
+  searchParams,
 }: {
-  params: { courseId: string; chapterId: string; lessonId: string };
+  params: {
+    courseId: string;
+    chapterId: string;
+    lessonId: string;
+    type: string;
+  };
+  searchParams: { type: string; res: string };
 }) => {
   const courseTtile = await getCourseTitleById(params.courseId);
   const chapterTitle = await getChapterTitleById(params.chapterId);
   const lessonTitle = await getLessonTitleById(params.lessonId);
+
   const list = [
     {
       name: courseTtile,
@@ -37,7 +46,11 @@ const page = async ({
     <section className="max-h-screen">
       <Breadcrumb listofLinks={list} />
       <div className="container mx-auto p-4">
-        <LessonMain />
+        <LessonMain
+          resource={searchParams.res}
+          type={searchParams.type}
+          lessonId={params.lessonId}
+        />
       </div>
     </section>
   );

@@ -31,6 +31,7 @@ interface CourseModuleProps {
   courseDescrpeiton: string | undefined;
   chapterss: Awaited<ReturnType<typeof getCourseByIdForLearnPage>> | undefined;
   image: string | undefined;
+  courseId:string
 }
 
 export default function CourseModule({
@@ -38,6 +39,7 @@ export default function CourseModule({
   courseDescrpeiton,
   chapterss,
   image,
+  courseId
 }: CourseModuleProps) {
   const chapters = [
     {
@@ -133,10 +135,12 @@ export default function CourseModule({
               />
             </div>
             <div className="mt-4 space-y-4">
+              <Link href={`/course/${courseId}`}>
               <Button className="w-full" variant={"primary"}>
                 Continue Learning
                 <Play className="w-4 h-4 " />
                 </Button>
+                </Link>
             </div>
           </CardContent>
         </Card>

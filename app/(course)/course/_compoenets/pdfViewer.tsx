@@ -12,8 +12,13 @@ import { ChevronLeft, ChevronRight, Loader } from "lucide-react";
 import { useResizeDetector } from "react-resize-detector";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
+import { getResourceById } from "@/actions/lesson/lesson";
 
-function PdfViewr() {
+interface PdfView {
+  res:Awaited<ReturnType<typeof getResourceById>>
+}
+
+function PdfViewr({res}:PdfView) {
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +52,7 @@ function PdfViewr() {
             return <div className="flex justify-center">Error loading PDF</div>;
           }}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-          file="https://utfs.io/f/q5pimLxVq7kFo21fYUez5Ty8Q9jadkibrLB2JmMVZ0E7HgwA"
+          file={res?.url}
         >
           {new Array(numPages).fill(0).map((_, i) => (
             <Page key={i} className="w-full" pageNumber={i + 1} />
@@ -55,12 +60,19 @@ function PdfViewr() {
         </Document>
       </div>
       <div className="flex items-center justify-between mb-4">
-        <Button variant="outline" size="sm" onClick={() => setPageNumber(pageNumber - 1)} disabled={pageNumber === 1}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setPageNumber(pageNumber - 1)}
+          disabled={pageNumber === 1}
+        >
           <ChevronLeft className="h-4 w-4 mr-2" />
           Previous Page
         </Button>
         <div className="flex items-center space-x-2">
-          <span className="text-sm">Page {pageNumber} of {numPages}</span>
+          <span className="text-sm">
+            Page {pageNumber} of {numPages}
+          </span>
           {/* <Slider
             defaultValue={[20]}
             max={100}
@@ -68,7 +80,12 @@ function PdfViewr() {
             className="w-[100px]"
           /> */}
         </div>
-        <Button variant="outline" size="sm" onClick={() => setPageNumber(pageNumber + 1)} disabled={pageNumber === numPages}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setPageNumber(pageNumber + 1)}
+          disabled={pageNumber === numPages}
+        >
           Next Page
           <ChevronRight className="h-4 w-4 ml-2" />
         </Button>

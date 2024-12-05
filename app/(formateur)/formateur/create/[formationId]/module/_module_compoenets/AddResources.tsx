@@ -47,12 +47,12 @@ function UploadLessonResource({ onFileChange }: UploadLessonResourceProps) {
         >
           {({ getRootProps, getInputProps }) => (
             <div {...getRootProps()} className="flex flex-col items-center">
-              <input {...getInputProps()} />
+              <input {...getInputProps()} type="file" accept=".pdf" />
 
               {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
               {loading && (
                 <>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-xs text-muted-foreground mb-4">
                     Uploading...
                   </p>
                   <Progress

@@ -1,20 +1,19 @@
 "use client";
-import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  Home,
-  FileText,
   Download,
-  Printer,
-  ChevronLeft,
-  ChevronRight,
+  Printer
 } from "lucide-react";
-import { Slider } from "@/components/ui/slider";
 
 import PdfViewr from "@/app/(course)/course/_compoenets/pdfViewer";
+import { getResourceById } from "@/actions/lesson/lesson";
 
-function PdfLesson() {
+interface PdfLesson{
+  res:Awaited<ReturnType<typeof getResourceById>>
+}
+
+function PdfLesson({res}:PdfLesson) {
   return (
     <Card className="max-w-5xl mx-auto">
       <CardHeader>
@@ -31,15 +30,9 @@ function PdfLesson() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {/* PDF Viewer Placeholder */}
         <div className="aspect-[4/3] bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
-          {/* <FileText className="h-24 w-24 text-gray-400" /> */}
-          <PdfViewr />
+          <PdfViewr res={res} />
         </div>
-
-        {/* PDF Controls */}
-
-        {/* Reading Information */}
         <div className="space-y-4">
           <div>
             <h2 className="text-xl font-semibold">
