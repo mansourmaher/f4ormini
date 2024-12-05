@@ -124,7 +124,7 @@ const VideoLesson = async ({
               </TabsContent>
               <TabsContent value="notes" className="space-y-4 p-4">
                 <Card>
-                  <CardContent className="p-4" className="space-y-4 p-4">
+                  <CardContent className="space-y- p-4">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-semibold">My Notes</h3>
                       <Button variant="outline" size="sm">
@@ -144,6 +144,7 @@ const VideoLesson = async ({
             </Tabs>
 
             <div className="flex items-center space-x-2">
+              4
               <Checkbox id="terms" />
               <label
                 htmlFor="terms"

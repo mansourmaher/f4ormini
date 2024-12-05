@@ -31,7 +31,7 @@ interface CourseModuleProps {
   courseDescrpeiton: string | undefined;
   chapterss: Awaited<ReturnType<typeof getCourseByIdForLearnPage>> | undefined;
   image: string | undefined;
-  courseId:string
+  courseId: string;
 }
 
 export default function CourseModule({
@@ -39,78 +39,8 @@ export default function CourseModule({
   courseDescrpeiton,
   chapterss,
   image,
-  courseId
+  courseId,
 }: CourseModuleProps) {
-  const chapters = [
-    {
-      title: "Building the Front-End",
-      description:
-        "Learn advanced design concepts and practical techniques for web development",
-      progress: 45,
-      lessons: [
-        {
-          title: "Introduction",
-          duration: "20 minutes",
-          type: "video",
-          hasPreview: true,
-          description: "Overview of the front-end development module",
-          resources: ["Course slides", "Setup guide"],
-          hasQuiz: true,
-          hasAssignment: true,
-        },
-        {
-          title: "Introduction to design fundamentals",
-          duration: "20 minutes",
-          type: "video",
-          description: "Learn about core design principles and concepts",
-          resources: ["Design guidelines", "Color theory basics"],
-          hasQuiz: true,
-        },
-        {
-          title: "Starting the creative process",
-          duration: "20 minutes",
-          type: "reading",
-          description: "Understanding how to approach design challenges",
-          resources: ["Case studies", "Project templates"],
-          hasAssignment: true,
-        },
-        {
-          title: "Composition principles and layout techniques",
-          duration: "20 minutes",
-          type: "video",
-          description: "Master the art of layout and composition",
-          resources: ["Layout examples", "Grid systems guide"],
-          hasQuiz: true,
-        },
-      ],
-    },
-    {
-      title: "Server-Side Development with Node.js",
-      description:
-        "Master server-side programming with Node.js and related technologies",
-      progress: 20,
-      lessons: [
-        {
-          title: "Node.js Fundamentals",
-          duration: "25 minutes",
-          type: "video",
-          hasPreview: true,
-          description: "Introduction to Node.js and its core concepts",
-          resources: ["Node.js documentation", "Code examples"],
-          hasQuiz: true,
-        },
-        {
-          title: "Building RESTful APIs",
-          duration: "30 minutes",
-          type: "video",
-          description: "Learn how to create robust REST APIs",
-          resources: ["API design guide", "Postman collection"],
-          hasAssignment: true,
-        },
-      ],
-    },
-  ];
-
   return (
     <div className="container mx-auto p-6">
       <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
@@ -134,13 +64,13 @@ export default function CourseModule({
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="mt-4 space-y-4">
+            <div className="mt-4 space-y-4 space-x-2">
               <Link href={`/course/${courseId}`}>
-              <Button className="w-full" variant={"primary"}>
-                Continue Learning
-                <Play className="w-4 h-4 " />
+                <Button className="w-full gap-x-2" variant={"primary"}>
+                  Continue Learning
+                  <Play className="w-3 h-3 " />
                 </Button>
-                </Link>
+              </Link>
             </div>
           </CardContent>
         </Card>

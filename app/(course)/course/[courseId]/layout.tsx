@@ -6,6 +6,7 @@ import CourseSidbar from "../_compoenets/courseSidebar";
 import CourseSidbearFetchData from "../_compoenets/courseSidebFetchData";
 import CourseBreadCrumbs from "../_compoenets/courseBreadcrumb";
 import { getCourseById } from "@/actions/course/course";
+import { existpurchase } from "@/actions/courseuser/courseuser";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,13 @@ const LayoutPage = async ({
   params: { courseId: string };
 }>) => {
   const course = await getCourseById(params.courseId);
+  const exisintingpurchase = await existpurchase(params.courseId);
+
   if (!course) {
     return null;
+  }
+  if (!exisintingpurchase) {
+    return <>Not authoriezd</>;
   }
   return (
     <div>

@@ -10,7 +10,6 @@ import LessonMain from "../_compoenets/lessonMain";
 
 const page = async ({
   params,
-  searchParams,
 }: {
   params: {
     courseId: string;
@@ -18,7 +17,6 @@ const page = async ({
     lessonId: string;
     type: string;
   };
-  searchParams: { type: string; res: string };
 }) => {
   const courseTtile = await getCourseTitleById(params.courseId);
   const chapterTitle = await getChapterTitleById(params.chapterId);
@@ -46,11 +44,7 @@ const page = async ({
     <section className="max-h-screen">
       <Breadcrumb listofLinks={list} />
       <div className="container mx-auto p-4">
-        <LessonMain
-          resource={searchParams.res}
-          type={searchParams.type}
-          lessonId={params.lessonId}
-        />
+        <LessonMain lessonId={params.lessonId} />
       </div>
     </section>
   );

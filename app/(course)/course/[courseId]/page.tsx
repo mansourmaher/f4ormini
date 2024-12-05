@@ -4,6 +4,7 @@ import CourseSidbearFetchData from "../_compoenets/courseSidebFetchData";
 import CourseBreadCrumbs from "../_compoenets/courseBreadcrumb";
 import { getCourseTitleById } from "@/actions/course/course";
 import { url } from "inspector";
+import { existpurchase } from "@/actions/courseuser/courseuser";
 
 const page = async ({ params }: { params: { courseId: string } }) => {
   const courseTitle = await getCourseTitleById(params.courseId);
