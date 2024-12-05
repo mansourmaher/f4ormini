@@ -30,7 +30,15 @@ const LayoutPage = async ({
     return null;
   }
   if (!exisintingpurchase) {
-    return <UnothorizeState />;
+    return (
+      <div>
+        <CourseSidbearFetchData courseId={params.courseId} />
+
+        <div className="flex flex-col min-h-screen mx-auto justify-center ">
+          <UnothorizeState />
+        </div>
+      </div>
+    );
   }
   return (
     <div>
