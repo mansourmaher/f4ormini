@@ -1,8 +1,6 @@
 "use client";
 import Link from "next/link";
-import { SelectField } from "../../_landingPageComponents/Fields";
-import { Logo } from "../../_landingPageComponents/Logo";
-import { SlimLayout } from "../../_landingPageComponents/SlimLayout";
+
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormSucces } from "../login/_compoenets/Form-succes";
+import { SlimLayout } from "@/app/_landing_component/slim-layout";
 
 export default function Register() {
   const [isPending, startTransition] = useTransition();
@@ -50,11 +49,6 @@ export default function Register() {
 
   return (
     <SlimLayout>
-      <div className="flex">
-        <Link href="/" aria-label="Home">
-          <Logo className="h-10 w-auto" />
-        </Link>
-      </div>
       <h2 className="mt-20 text-lg font-semibold text-gray-900">
         Get started for free
       </h2>
@@ -62,7 +56,7 @@ export default function Register() {
         Already registered?{" "}
         <Link
           href="/login"
-          className="font-medium text-blue-600 hover:underline"
+          className="font-medium text-orange-600 hover:underline"
         >
           Sign in
         </Link>{" "}
@@ -150,21 +144,11 @@ export default function Register() {
             )}
           />
 
-          <SelectField
-            className="col-span-full"
-            label="How did you hear about us?"
-            name="referral_source"
-          >
-            <option>AltaVista search</option>
-            <option>Super Bowl commercial</option>
-            <option>Our route 34 city bus ad</option>
-            <option>The “Never Use This” podcast</option>
-          </SelectField>
           <div className="col-span-full">
             <Button
               type="submit"
               className="w-full cursor-pointer"
-              variant="primary"
+              variant="ghost"
               disabled={isPending}
             >
               <span>

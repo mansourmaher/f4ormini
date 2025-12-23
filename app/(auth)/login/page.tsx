@@ -2,10 +2,6 @@
 import { type Metadata } from "next";
 import Link from "next/link";
 
-import { Button } from "../../_landingPageComponents/Button";
-import { TextField } from "../../_landingPageComponents/Fields";
-import { Logo } from "../../_landingPageComponents/Logo";
-import { SlimLayout } from "../../_landingPageComponents/SlimLayout";
 import { LoginSchema } from "@/app/schemas";
 import { login } from "@/actions/auth/login";
 import { z } from "zod";
@@ -24,6 +20,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { FormError } from "./_compoenets/Form-error";
 import { FormSucces } from "./_compoenets/Form-succes";
+import { SlimLayout } from "@/app/_landing_component/slim-layout";
+import { Button } from "@/components/ui/button";
 
 export default function Login() {
   const [isPending, startTransition] = useTransition();
@@ -53,11 +51,6 @@ export default function Login() {
   };
   return (
     <SlimLayout>
-      <div className="flex ">
-        <Link href="/" aria-label="Home">
-          <Logo className="h-10 w-auto" />
-        </Link>
-      </div>
       <h2 className="mt-20 text-lg font-semibold text-gray-900">
         Sign in to your account
       </h2>
@@ -65,7 +58,7 @@ export default function Login() {
         Don’t have an account?{" "}
         <Link
           href="/register"
-          className="font-medium text-blue-600 hover:underline"
+          className="font-medium text-orange-600 hover:underline"
         >
           Sign up
         </Link>{" "}
@@ -125,10 +118,9 @@ export default function Login() {
           <div>
             <Button
               type="submit"
-              variant="solid"
-              color="blue"
-              className="w-full"
+              className="w-full cursor-pointer"
               disabled={isPending}
+              variant="ghost"
               onClick={() => form.handleSubmit(onSubmit)}
             >
               <span>

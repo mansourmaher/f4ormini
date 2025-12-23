@@ -36,22 +36,8 @@ export const login=async(values:z.infer<typeof LoginSchema>)=>
 
     
     try{
-        if(existingUser.role ==="TEACHER")
-        {
-            await signIn('credentials',{email,password,redirectTo:"/teacher_dashbord"})
-            return {success:"Logged in"}
-        }
-        else if(existingUser.role ==="STUDENT")
-            { await signIn('credentials',{email,password,redirectTo:"/"})
-        
-        return {success:"Logged in"}}
-        else if(existingUser.role==="ADMIN")
-            {
-                await signIn('credentials',{email,password,redirectTo:"/admin/admin_dashboard"})
-                return {success:"Logged in"}
-
-
-            }
+        await signIn('credentials',{email,password,redirectTo:"/"})
+        return {success:"Logged in"}
        
     }catch(error:any){
         if(error instanceof AuthError)

@@ -38,35 +38,55 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-enum UserRole {
-  STUDENT
-  ADMIN
-  TEACHER
-}
-
 model User {
   id            String    @id @default(cuid())
-  firstName     String
-  lastName      String
-  email         String?   @unique
+  name          String?
+  email         String    @unique
   emailVerified DateTime?
-  password      String?
-  role          UserRole  @default(STUDENT)
   image         String?
-  createdAt     DateTime? @default(now())
-  accounts      Account[]
-  teacherAccess Boolean   @default(false)
-  filier        String?
-  about         String?
-  DateOfBirth   DateTime?
-  subtitle      String?
-  linkedin      String?
-  twitter       String?
-  github        String?
-  patiants      String[]
-  points        Int?      @default(0)
-  course        course[]
-  courseUser CourseUser[]
+  password      String? // For credentials authentication
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Personal Information
+  firstName    String?
+  lastName     String?
+  phone        String?
+  dateOfBirth  DateTime?
+  age          Int?
+  bio          String?
+  profileImage String?
+
+  // Location
+  address String?
+  city    String?
+  state   String?
+  zipCode String?
+
+  // Financial Information
+  employmentStatus String?
+  occupation       String?
+  employer         String?
+  annualSalary     Float?
+  netWorth         Float?
+  totalDebt        Float?
+  creditScore      String? // excellent, good, fair, poor, very-poor
+
+  // Preferences
+  buyerSeller     String? // buyer, seller, both
+  budgetRange     String?
+  preferredBrands String?
+
+  // Notification Preferences
+  emailNotifications Boolean @default(true)
+  smsNotifications   Boolean @default(false)
+  gender             String?
+
+  // Relations
+  accounts    Account[]
+  carListings Car[]
+
+  @@index([email])
 }
 
 model VerificationToken {
@@ -87,99 +107,54 @@ model PasswordResetToken {
   @@unique([email, token])
 }
 
-model course {
-  id          String    @id @default(cuid())
-  title       String
+model Car {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Basic Information
+  title String
+  make  String
+  model String
+  year  Int
+  vin   String?
+
+  // Vehicle Details
+  mileage       Int
+  condition     String // excellent, good, fair, poor
+  bodyType      String // sedan, suv, truck, coupe, convertible, wagon, van, hatchback
+  transmission  String // automatic, manual, cvt
+  fuelType      String // gasoline, diesel, electric, hybrid, plug-in-hybrid
+  exteriorColor String
+  interiorColor String
+  doors         Int
+  seats         Int
+
+  // Seller
+
+  // Description & Features
   description String
-  image       String
-  chapters    Chapter[]
-  skills      String[]
-  price       Float
-  category    String?
-  level       String?
-  certificate Boolean   @default(false)
-  status      String    @default("draft")
+  features    String[] // Array of feature IDs: bluetooth, backup-camera, navigation, etc.
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // Pricing
+  price      Float
+  negotiable Boolean
 
-  courseUserId CourseUser[]
+  // Images
+  images String[] // Array of image URLs/base64 strings
 
-  createdById String
-  createdBy   User   @relation(fields: [createdById], references: [id])
-}
+  // Contact Information
+  location  String
+  ownerName String
+  phone     String
 
-model Lesson {
-  id          String     @id @default(cuid())
-  title       String
-  description String?
-  video       String?
-  assignments String[]
-  resources   Resource[]
-  private     Boolean    @default(false)
-  status      String     @default("draft")
-  courseId    String
-  chapterId   String
-  chapter     Chapter    @relation(fields: [chapterId], references: [id])
+  // Status (optional, for managing listings)
+  status String  @default("draft") // draft, published, sold, archived
+  user   User?   @relation(fields: [userId], references: [id]) // Remove name parameter
+  userId String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Quiz      Quiz[]
-}
-
-model Resource {
-  id            String   @id @default(cuid())
-  url           String
-  title         String
-  descreption   String?
-  estimatedTime Float?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  Lesson        Lesson?  @relation(fields: [lessonId], references: [id])
-  lessonId      String?
-}
-
-model Chapter {
-  id        String   @id @default(uuid())
-  title     String
-  courseId  String
-  course    course   @relation(fields: [courseId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  lessons   Lesson[]
-
-  @@index([courseId], name: "courseId")
-}
-
-model Quiz {
-  id       String @id @default(uuid())
-  question String
-  answer   String
-
-  createdAt DateTime @default(now())
-
-  options  Options[]
-  lessonId String
-  lesson   Lesson    @relation(fields: [lessonId], references: [id])
-
-  //
-}
-
-model Options {
-  id            String   @id @default(uuid())
-  options       String[]
-  correctOption String
-  quizId        String
-  quiz          Quiz     @relation(fields: [quizId], references: [id])
-
-  @@index([quizId], name: "quizId")
-}
-
-model CourseUser {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User?    @relation(fields: [userId], references: [id])
-  courseId  String
-  course    course   @relation(fields: [courseId], references: [id])
-  createdAt DateTime @default(now())
+  @@index([make])
+  @@index([year])
+  @@index([price])
+  @@index([status])
 }

@@ -24,27 +24,39 @@ Table Account {
 
 Table User {
   id String [pk]
-  firstName String [not null]
-  lastName String [not null]
-  email String [unique]
+  name String
+  email String [unique, not null]
   emailVerified DateTime
-  password String
-  role UserRole [not null, default: 'STUDENT']
   image String
-  createdAt DateTime [default: `now()`]
+  password String
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  firstName String
+  lastName String
+  phone String
+  dateOfBirth DateTime
+  age Int
+  bio String
+  profileImage String
+  address String
+  city String
+  state String
+  zipCode String
+  employmentStatus String
+  occupation String
+  employer String
+  annualSalary Float
+  netWorth Float
+  totalDebt Float
+  creditScore String
+  buyerSeller String
+  budgetRange String
+  preferredBrands String
+  emailNotifications Boolean [not null, default: true]
+  smsNotifications Boolean [not null, default: false]
+  gender String
   accounts Account [not null]
-  teacherAccess Boolean [not null, default: false]
-  filier String
-  about String
-  DateOfBirth DateTime
-  subtitle String
-  linkedin String
-  twitter String
-  github String
-  patiants String[] [not null]
-  points Int [default: 0]
-  course course [not null]
-  courseUser CourseUser [not null]
+  carListings Car [not null]
 }
 
 Table VerificationToken {
@@ -69,111 +81,37 @@ Table PasswordResetToken {
   }
 }
 
-Table course {
+Table Car {
   id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
   title String [not null]
+  make String [not null]
+  model String [not null]
+  year Int [not null]
+  vin String
+  mileage Int [not null]
+  condition String [not null]
+  bodyType String [not null]
+  transmission String [not null]
+  fuelType String [not null]
+  exteriorColor String [not null]
+  interiorColor String [not null]
+  doors Int [not null]
+  seats Int [not null]
   description String [not null]
-  image String [not null]
-  chapters Chapter [not null]
-  skills String[] [not null]
+  features String[] [not null]
   price Float [not null]
-  category String
-  level String
-  certificate Boolean [not null, default: false]
+  negotiable Boolean [not null]
+  images String[] [not null]
+  location String [not null]
+  ownerName String [not null]
+  phone String [not null]
   status String [not null, default: 'draft']
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  courseUserId CourseUser [not null]
-  createdById String [not null]
-  createdBy User [not null]
-}
-
-Table Lesson {
-  id String [pk]
-  title String [not null]
-  description String
-  video String
-  assignments String[] [not null]
-  resources Resource [not null]
-  private Boolean [not null, default: false]
-  status String [not null, default: 'draft']
-  courseId String [not null]
-  chapterId String [not null]
-  chapter Chapter [not null]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  Quiz Quiz [not null]
-}
-
-Table Resource {
-  id String [pk]
-  url String [not null]
-  title String [not null]
-  descreption String
-  estimatedTime Float
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  Lesson Lesson
-  lessonId String
-}
-
-Table Chapter {
-  id String [pk]
-  title String [not null]
-  courseId String [not null]
-  course course [not null]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  lessons Lesson [not null]
-}
-
-Table Quiz {
-  id String [pk]
-  question String [not null]
-  answer String [not null]
-  createdAt DateTime [default: `now()`, not null]
-  options Options [not null]
-  lessonId String [not null]
-  lesson Lesson [not null]
-}
-
-Table Options {
-  id String [pk]
-  options String[] [not null]
-  correctOption String [not null]
-  quizId String [not null]
-  quiz Quiz [not null]
-}
-
-Table CourseUser {
-  id String [pk]
-  userId String [not null]
   user User
-  courseId String [not null]
-  course course [not null]
-  createdAt DateTime [default: `now()`, not null]
-}
-
-Enum UserRole {
-  STUDENT
-  ADMIN
-  TEACHER
+  userId String
 }
 
 Ref: Account.userId > User.id [delete: Cascade]
 
-Ref: course.createdById > User.id
-
-Ref: Lesson.chapterId > Chapter.id
-
-Ref: Resource.lessonId > Lesson.id
-
-Ref: Chapter.courseId > course.id
-
-Ref: Quiz.lessonId > Lesson.id
-
-Ref: Options.quizId > Quiz.id
-
-Ref: CourseUser.userId > User.id
-
-Ref: CourseUser.courseId > course.id
+Ref: Car.userId > User.id
